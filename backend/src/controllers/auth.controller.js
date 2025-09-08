@@ -24,9 +24,9 @@ async function registerUser(req, res) {
   const token = jwt.sign(
     {
       id: user._id,
-    },
-    "thisissecret"
-  );
+    },process.env.JWT_SECRET);
+
+
   res.cookie("token", token);
   res.status(201).json({
     message: "User Registered successfully ",
@@ -46,7 +46,7 @@ async function loginUser(req, res) {
   });
 
   if (!user) {
-    res.status(400).json({
+    return res.status(400).json({
       message: "Invalid email or passsword",
     });
   }
@@ -54,7 +54,7 @@ async function loginUser(req, res) {
   const isPasswordValid = await bcrypt.compare(password, user.password);
 
   if (!isPasswordValid) {
-    res.status(400).json({
+    return res.status(400).json({
       message: "Invalid email or passsword",
     });
   }
@@ -62,9 +62,7 @@ async function loginUser(req, res) {
   const token = jwt.sign(
     {
       id: user._id,
-    },
-    "7f1483bde67e132f598a4fa7aa19eb05"
-  );
+    },process.env.JWT_SECRET);
 
   res.cookie("token", token);
 
