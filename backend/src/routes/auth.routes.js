@@ -4,8 +4,10 @@ const router = express.Router();
 
 // USER AUTH API'S
 router.post("/user/register", authController.registerUser);
-router.post('/user/login', authController.loginUser)
-router.get('/user/logout',authController.logoutUser)
+router.post('/user/login', authController.loginUser);
+router.get('/user/logout',authController.logoutUser);
+
+
 // FOOD PARTNER API's
 router.post("/food-partner/register",authController.registerFoodPartner);
 router.post("/food-partner/login",authController.loginFoodPartner);
